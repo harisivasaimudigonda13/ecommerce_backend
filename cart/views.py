@@ -9,6 +9,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import Cart, CartItem
 from .serializers import CartSerializer, CartItemSerializer
+from django.contrib.auth.models import User
 
 class CartView(APIView):
     permission_classes = [IsAuthenticated]
@@ -29,9 +30,17 @@ class AddToCartView(APIView):
         item, created = CartItem.objects.get_or_create(cart=cart, product_id=product_id)
         if not created:
             item.quantity += quantity
+        else:
+            item.quantity = quantity
         item.save()
+        # quantity = int(request.data.get("quantity", 1))
+        # print("Quantity received:", quantity)
 
-        return Response({"message": "Item added to cart"}, status=status.HTTP_200_OK)
+        # REFRESH CART from DB
+        cart.refresh_from_db()  # <--- important
+        serializer = CartSerializer(cart)  # serialize latest cart
+
+        return Response({"message": "Item added to cart" ,"cart": serializer.data}, status=status.HTTP_200_OK)
 
 class RemoveFromCartView(APIView):
     permission_classes = [IsAuthenticated]

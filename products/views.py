@@ -23,7 +23,7 @@ def dashboard_stats(request):
     data = {
         "products": Product.objects.count(),
         "users": User.objects.count(),
-        "cart": Cart.objects.count(),
+        "orders": Cart.objects.count(),
     }
     return Response(data)
 
