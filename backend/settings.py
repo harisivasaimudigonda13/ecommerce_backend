@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-t$k@q+z_!g4ee5ge9p1i%g8$a41j-1lxvr($%n09!7yx%ojqyk
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    'https://ecommerce-backend-2jjn.onrender.com/',
+    'ecommerce-backend-2jjn.onrender.com',
     'localhost',
 ]
 
