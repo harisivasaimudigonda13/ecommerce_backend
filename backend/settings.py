@@ -29,6 +29,7 @@ DEBUG = False
 ALLOWED_HOSTS = [
     'ecommerce-backend-2jjn.onrender.com',
     'localhost',
+    '127.0.0.1'
 ]
 
 
